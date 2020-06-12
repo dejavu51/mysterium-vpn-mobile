@@ -49,6 +49,7 @@ class ProposalsFragment : Fragment() {
     private lateinit var proposalsSearchInput: EditText
     private lateinit var proposalsSwipeRefresh: SwipeRefreshLayout
     private lateinit var proposalsProgressBar: ProgressBar
+    private lateinit var proposalsFilterCountry: LinearLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -63,14 +64,19 @@ class ProposalsFragment : Fragment() {
         proposalsSearchInput = root.findViewById(R.id.proposals_search_input)
         proposalsSwipeRefresh = root.findViewById(R.id.proposals_list_swipe_refresh)
         proposalsProgressBar = root.findViewById(R.id.proposals_progress_bar)
+        proposalsFilterCountry = root.findViewById(R.id.proposals_filter_country)
 
-        proposalsCloseButton.setOnClickListener { handleClose(root) }
+        proposalsFilterCountry.setOnClickListener {
+            navigateTo(root, Screen.PROPOSALS_COUNTRY_FILTER_LIST)
+        }
+
 
         initProposalsList(root)
 //        initProposalsSortDropdown(root)
 //        initProposalsServiceTypeFilter(root)
         initProposalsSearchFilter()
 
+        proposalsCloseButton.setOnClickListener { handleClose(root) }
         onBackPress {
             navigateTo(root, Screen.MAIN)
         }
